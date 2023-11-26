@@ -5,7 +5,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Account from "./pages/Account";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/SingUp";
+
 
 
 function App() {
