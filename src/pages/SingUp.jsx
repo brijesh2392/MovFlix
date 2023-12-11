@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserAuth } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, signUp } = UserAuth();
+  const { user, signUp } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signUp(email, password);
+      await signUp(email, password)
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -57,7 +57,7 @@ const SignUp = () => {
                 <p className="py-8">
                   <span className="text-gray-600">
                     Already subscribed to Movflix?
-                  </span>{" "}
+                  </span>
                   <Link to="/login">Sign In</Link>
                 </p>
               </form>

@@ -13,12 +13,18 @@ const AuthContext = createContext();
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState({});
 
-  function signUp(email, password) {
-    createUserWithEmailAndPassword(auth, email, password);
-    setDoc(doc(db, 'users', email), {
-        savedShows: []
-    })
-  }
+  async function signUp(email, password) {
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, 'users', email), {
+            savedShows: []
+        });
+        // Additional logic if needed after both operations succeed
+    } catch (error) {
+        console.error('Error signing up:', error.message);
+        // Handle errors appropriately
+    }
+}
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -44,6 +50,6 @@ export function AuthContextProvider({ children }) {
   );
 }
 
-export function UserAuth() {
+export function useAuth() {
   return useContext(AuthContext);
 }
